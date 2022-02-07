@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# insta485run
+#
+# run flask
+
+# Stop on errors
+set -Eeuo pipefail
+
+# create database if it doesn't already exist
+if [[ ! -f "var/insta485.sqlite3" ]]; then
+    ./bin/insta485db create
+fi
+
+# export flask environment variables
+export FLASK_ENV=development
+export FLASK_APP=insta485
+
+# start server
+flask run --host 0.0.0.0 --port 8000

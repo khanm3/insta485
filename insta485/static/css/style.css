@@ -1,0 +1,87 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+
+.bottom_border{
+    border-bottom: 2px solid rgb(175, 163, 163);
+}
+
+.header img{
+    height: 40px;
+    width: auto;
+}
+
+#site_name{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 20px;
+    border-left: 2px solid rgb(175, 163, 163);
+}
+
+.push_right{
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.post{
+    border: 2px solid rgb(175, 163, 163);
+    margin: 40px;
+}
+
+.user_img{
+    width: 15px;
+    height: auto;
+}
+
+.post_img{
+    width: 100%;
+    height: auto;
+}
+
+.color_grey{
+    color:rgb(175, 163, 163);
+}
+
+.imgs_container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.post_container{
+    width: 50%;
+}
+
+.imgs_container img{
+    width: 80%;
+    height: auto;
+}
+
+.profile{
+    margin: 40px;
+}
+
+.border_box{
+    border: 2px solid rgb(175, 163, 163);
+    padding: 10px;
+    margin: 10px;
+}
+
+.post_page_img{
+    width: 65%;
+    height: auto;
+    margin: 5px;
+}
+
+.post_page{
+    display: flex;
+    flex-direction: row;
+}
+
+.post_page_text{
+    width: 35%;
+}

@@ -1,0 +1,35 @@
+{% include 'header.html' %}
+    <div>
+        {% if follow_type == "followers" %}
+        <h1>Followers</h1>
+        {% else %}
+        <h1>Following</h1>
+        {% endif %}
+        {% for follow_info in follow %}
+        <div class="header border_box">
+            <img class="user_img" alt="picture" src="/uploads/{{follow_info.user_img_url}}">
+            <a href="/users/{{follow_info.username}}/"><strong>{{follow_info.username}}</strong></a>
+            {% if logname != follow_info.username %}
+            <div class="push_right color_grey">
+                {% if follow_info.logname_follows_username %}
+                following
+                <form action="/following/?target=/users/{{username}}/{{follow_type}}/" method="post" enctype="multipart/form-data">
+                    <input type="submit" name="unfollow" value="unfollow"/>
+                    <input type="hidden" name="username" value="{{follow_info.username}}"/>
+                    <input type="hidden" name="operation" value="unfollow"/>
+                </form>
+                {% else %}
+                not following
+                <form action="/following/?target=/users/{{username}}/{{follow_type}}/" method="post" enctype="multipart/form-data">
+                    <input type="submit" name="follow" value="follow"/>
+                    <input type="hidden" name="username" value="{{follow_info.username}}"/>
+                    <input type="hidden" name="operation" value="follow"/>
+                </form>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <title>insta485</title>
+</head>
+<body>
+    <div class="header bottom_border">
+        <a href="/"><img alt="logo" src="/static/images/insta_logo.png"></a>
+        <h1 id="site_name">insta485</h1>
+        <h3 class="push_right">
+            {% if logname != "" %}
+            <a href="/explore/">explore</a> |
+            <a href="/users/{{logname}}/">{{logname}}</a>
+            {% else %}
+            <a href="/accounts/login/">login</a>
+            {% endif %}
+        </h3>
+    </div>

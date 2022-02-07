@@ -1,0 +1,21 @@
+{% include 'header.html' %}
+
+<div>
+    <img alt="picture" src="/uploads/{{user.owner_img_url}}">
+    <p><strong>{{logname}}</strong></p>
+</div>
+
+<form action="/accounts/?target=/accounts/edit/" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept="image/*"/>
+    <input type="text" name="fullname" value="{{user.fullname}}" required/>
+    <input type="text" name="email" value="{{user.email}}" required/>
+    <input type="submit" name="update" value="submit"/>
+    <input type="hidden" name="operation" value="edit_account"/>
+</form>
+
+<a href="/accounts/password/"><strong>Change password</strong></a>
+
+<a href="/accounts/delete/"><strong>Delete account</strong></a>
+
+</body>
+</html>

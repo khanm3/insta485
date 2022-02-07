@@ -1,0 +1,60 @@
+#!/bin/bash
+#
+# insta485db
+#
+# database script stuff
+
+# Stop on errors
+set -Eeuo pipefail
+
+# Sanity check command line options
+usage() {
+    echo "Usage: $0 (create|destroy|reset|dump)"
+}
+
+if [ $# -ne 1 ]; then
+    usage
+    exit 1
+fi
+
+# Parse argument.  $1 is the first argument
+case $1 in
+    "create")
+        # exit if database already exists
+        if [[ -f "var/insta485.sqlite3" ]]; then
+            echo "Error: database already exists"
+            exit 1
+        fi
+        mkdir -p var/uploads
+        sqlite3 var/insta485.sqlite3 < sql/schema.sql
+        sqlite3 var/insta485.sqlite3 < sql/data.sql
+        cp sql/uploads/* var/uploads/
+        echo "DB created"
+        ;;
+    "destroy")
+        rm -rf var/insta485.sqlite3 var/uploads
+        echo "DB removed"
+        ;;
+    "reset")
+        ./bin/insta485db destroy
+        ./bin/insta485db create
+        echo "DB reset"
+        ;;
+    "dump")
+        echo "-----comments-----"
+        sqlite3 -batch -line var/insta485.sqlite3 'SELECT * FROM comments'
+        echo "-----following-----"
+        sqlite3 -batch -line var/insta485.sqlite3 'SELECT * FROM following'
+        echo "-----likes-----"
+        sqlite3 -batch -line var/insta485.sqlite3 'SELECT * FROM likes'
+        echo "-----posts-----"
+        sqlite3 -batch -line var/insta485.sqlite3 'SELECT * FROM posts'
+        echo "-----users-----"
+        sqlite3 -batch -line var/insta485.sqlite3 'SELECT * FROM users'
+        echo "DB dumped"
+        ;;
+    *)
+        usage
+        exit 1
+        ;;
+esac

@@ -1,0 +1,17 @@
+{% include 'header.html' %}
+
+<!-- DO NOT CHANGE THIS (aside from styling) -->
+<form action="/accounts/?target=/" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" placeholder="file" accept="image/*" required/>
+    <input type="text" name="fullname" placeholder="fullname" required/>
+    <input type="text" name="username" placeholder="username" required/>
+    <input type="text" name="email" placeholder="email" required/>
+    <input type="password" name="password" placeholder="password" required/>
+    <input type="submit" name="signup" value="sign up"/>
+    <input type="hidden" name="operation" value="create"/>
+  </form>
+
+<p>Have an account? <a href="/accounts/login/"><b>Log in</b></a></p>
+
+</body>
+</html>

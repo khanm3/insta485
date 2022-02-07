@@ -1,0 +1,19 @@
+{% include 'header.html' %}
+    <div>
+        <h1>Discover People</h1>
+        {% for user in not_following %}
+        <div class="header border_box">
+            <img class="user_img" alt="picture" src="/uploads/{{user.user_img_url}}">
+            <a href="/users/{{user.username}}/"><strong>{{user.username}}</strong></a>
+            <div class="push_right">
+                <form action="/following/?target=/explore/" method="post" enctype="multipart/form-data">
+                    <input type="submit" name="follow" value="follow"/>
+                    <input type="hidden" name="username" value="{{user.username}}"/>
+                    <input type="hidden" name="operation" value="follow"/>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
