@@ -24,6 +24,7 @@ var/
 # EECS 485 Project 3
 node_modules/
 cookies.txt
+session.json
 bundle.js
 
 # EECS 485 Project 4
