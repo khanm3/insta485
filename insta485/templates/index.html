@@ -1,44 +1,9 @@
 {% include 'header.html' %}
-{% for post_info in posts %}
-    <div class="post">
-        <div class="header">
-            <a href="/users/{{post_info.owner}}/"><img class="user_img" alt="{{post_info.owner}}"
-                src="/uploads/{{post_info.owner_img_url}}">
-            </a>
-            <a href="/users/{{post_info.owner}}/"><h3>{{post_info.owner}}</h3></a>
-            <a href="/posts/{{post_info.postid}}/" class="push_right color_grey"><h3>{{post_info.timestamp}}</h3></a>
-        </div>
-        <img class="post_img" alt="picture" src="/uploads/{{post_info.img_url}}">
-        <p>{{post_info.likes}} 
-            {% if post_info.likes == 1 %}
-            like
-            {% else %}
-            likes
-            {% endif %}
-        </p>
-        {% for comment_info in post_info.comments %}
-            <p><a href="/users/{{comment_info.owner}}/"><strong>{{comment_info.owner}}</strong></a> {{comment_info.text}}</p>
-        {% endfor %}
-        {% if post_info.liked %}
-        <form action="/likes/?target=/" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="operation" value="unlike"/>
-            <input type="hidden" name="postid" value="{{post_info.postid}}"/>
-            <input type="submit" name="unlike" value="unlike"/>
-        </form>
-        {% else %}
-        <form action="/likes/?target=/" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="operation" value="like"/>
-            <input type="hidden" name="postid" value="{{post_info.postid}}"/>
-            <input type="submit" name="like" value="like"/>
-        </form>
-        {% endif %}
-        <form action="/comments/?target=/" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="operation" value="create"/>
-            <input type="hidden" name="postid" value="{{post_info.postid}}"/>
-            <input type="text" name="text" required/>
-            <input type="submit" name="comment" value="comment"/>
-        </form>
+    <div id="reactEntry">
+        Loading ...
     </div>
-{% endfor %}
+    <!-- Load JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bundle.js') }}"></script>
 </body>
+
 </html>
