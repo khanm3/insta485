@@ -9,4 +9,4 @@ from insta485.views.follow import get_followers
 from insta485.views.follow import get_following
 from insta485.views.users import get_user
 from insta485.views.explore import get_explore
-#from insta485.views.posts import get_post
+from insta485.views.posts import get_post
