@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+platform linux -- Python 3.8.10, pytest-7.0.0, pluggy-1.0.0 -- /home/llemke/eecs485/p3-insta485-clientside/env/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/llemke/eecs485/p3-insta485-clientside
+collecting ... collected 15 items
+
+tests/test_rest_api_likes_and_comments.py::test_likes_delete PASSED      [  6%]
+tests/test_rest_api_likes_and_comments.py::test_likes_post PASSED        [ 13%]
+tests/test_rest_api_likes_and_comments.py::test_like_exists PASSED       [ 20%]
+tests/test_rest_api_likes_and_comments.py::test_comments_post PASSED     [ 26%]
+tests/test_rest_api_likes_and_comments.py::test_comments_delete PASSED   [ 33%]
+tests/test_rest_api_posts.py::test_posts_list PASSED                     [ 40%]
+tests/test_rest_api_posts.py::test_posts_detail PASSED                   [ 46%]
+tests/test_rest_api_posts.py::test_posts_autoincrement PASSED            [ 53%]
+tests/test_rest_api_posts.py::test_posts_pagination_simple PASSED        [ 60%]
+tests/test_rest_api_posts.py::test_posts_pagination_page_size PASSED     [ 66%]
+tests/test_rest_api_posts.py::test_posts_pagination_upload_between_requests PASSED [ 73%]
+tests/test_rest_api_posts.py::test_posts_pagination_errors PASSED        [ 80%]
+tests/test_rest_api_simple.py::test_resources PASSED                     [ 86%]
+tests/test_rest_api_simple.py::test_login_session PASSED                 [ 93%]
+tests/test_rest_api_simple.py::test_http_basic_auth PASSED               [100%]
+
+============================== 15 passed in 1.97s ==============================

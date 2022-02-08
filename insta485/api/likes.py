@@ -38,7 +38,7 @@ def rest_create_like():
                 )
         cur = connection.execute("select last_insert_rowid();")
         likeid = cur.fetchall()[0]['last_insert_rowid()']
-        context = {"likeid": likeid, "url": f"/api/v1/likes/{likeid}/"}
+        context = {"likeid": str(likeid), "url": f"/api/v1/likes/{likeid}/"}
         response = flask.jsonify(**context)
         response.status_code = 201
         return response
@@ -61,7 +61,7 @@ def rest_delete_like(likeid):
             )
     result = cur.fetchall()
     if len(result) < 1:
-        raise InvalidUsage("Not found", 404)
+        raise InvalidUsage("Not Found", 404)
     elif result[0]['owner'] != logname:
         raise InvalidUsage("Forbidden", 403)
     else:
