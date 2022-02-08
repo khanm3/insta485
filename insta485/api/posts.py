@@ -5,6 +5,31 @@ from insta485.api.helpers import get_username
 from insta485.api.helpers import InvalidUsage
 
 
+@insta485.app.route('/api/v1/posts/')
+def rest_get_posts():
+  """Return 10 newest post urls and ids. """
+  logname = get_username()
+  if not logname:
+      raise InvalidUsage("Forbidden", 403)
+
+  connection = insta485.model.get_db()
+
+  # Get posts
+  cur = connection.execute(
+    "select postid "
+    "from posts "
+    "order by postid desc "
+    "limit 10;"
+  )
+  results = cur.fetchall()
+
+  for post in results:
+    post["url"] = f"/api/v1/posts/{post['postid']}/"
+
+  context = {"next": "", "results": results, "url": "/api/v1/posts/"}
+  return flask.jsonify(**context)
+
+
 @insta485.app.route('/api/v1/posts/<int:postid_url_slug>/')
 def rest_get_post(postid_url_slug):
   """Return post on postid. """
