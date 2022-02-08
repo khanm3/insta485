@@ -13,20 +13,25 @@ def rest_get_posts():
       raise InvalidUsage("Forbidden", 403)
 
   connection = insta485.model.get_db()
+  context = {"next": "", , "url": "/api/v1/posts/"}
 
   # Get posts
   cur = connection.execute(
     "select postid "
     "from posts "
     "order by postid desc "
-    "limit 10;"
+    "limit 11;"
   )
   results = cur.fetchall()
+
+  if len(results) == 11:
+    context["next"] = "/api/v1/posts/?page=1"
+    results = results[:-1]
 
   for post in results:
     post["url"] = f"/api/v1/posts/{post['postid']}/"
 
-  context = {"next": "", "results": results, "url": "/api/v1/posts/"}
+  context["results"] = results
   return flask.jsonify(**context)
 
 
