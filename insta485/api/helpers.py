@@ -5,6 +5,20 @@ from insta485.views.helpers import gen_hash
 from insta485.views.helpers import user_exists
 from insta485.views.helpers import setup_queries
 
+class InvalidUsage(Exception):
+    def __init__(self, message, status_code):
+        Exception.__init__(self)
+        self.message = message
+        self.status_code = status_code
+
+    def to_dict(self):
+        return {'message': self.message, 'status_code': self.status_code}
+
+@insta485.app.errorhandler(InvalidUsage)
+def handle_invalid_usage(error):
+    response = flask.jsonify(error.to_dict())
+    response.status = error.status_code
+    return response
 
 def get_username():
     """Return username or None if unauthenticated."""

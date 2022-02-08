@@ -2,13 +2,15 @@
 import flask
 import insta485
 from insta485.api.helpers import get_username
+from insta485.api.helpers import InvalidUsage
+
 
 @insta485.app.route('/api/v1/posts/<int:postid_url_slug>/')
 def rest_get_post(postid_url_slug):
   """Return post on postid. """
   logname = get_username()
   if not logname:
-    flask.abort(403)
+      raise InvalidUsage("Forbidden", 403)
 
   connection = insta485.model.get_db()
 
@@ -23,7 +25,7 @@ def rest_get_post(postid_url_slug):
   post = cur.fetchall()
 
   if len(post) != 1:
-      flask.abort(404)
+      raise InvalidUsage("Not found", 404)
 
   # Get comments of this post
   cur = connection.execute(
