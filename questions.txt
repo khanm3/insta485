@@ -1,2 +1,7 @@
 1) when is "next" for posts empty? When you have exactly size posts, should next return the next page even though its empty? 
 2) string vs int for likeid
+
+todo:
+- complete main page
+- infinite scroll
+- history api
