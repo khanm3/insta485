@@ -157,7 +157,7 @@ class Post extends React.Component {
           <a href={ownerShowUrl}><h3>{owner}</h3></a>
           <a href={postShowUrl} className="push_right color_grey"><h3>{createdHumanized}</h3></a>
         </div>
-        <img onDoubleClick={() => { if (!likes.lognameLikesThis) { this.handleLike(); } }} src={imgUrl} alt="post" />
+        <img className="post_img" onDoubleClick={() => { if (!likes.lognameLikesThis) { this.handleLike(); } }} src={imgUrl} alt="post" />
         <p>
           {likes.numLikes}
           {likes.numLikes === 1 ? ' like' : ' likes'}
