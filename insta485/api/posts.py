@@ -12,7 +12,6 @@ def rest_get_posts():
     if not logname:
         raise InvalidUsage("Forbidden", 403)
 
-    
     size = flask.request.args.get("size", default=10, type=int)
     page = flask.request.args.get("page", default=0, type=int)
     postid_lte = flask.request.args.get("postid_lte", type=int)
@@ -47,7 +46,6 @@ def rest_get_posts():
         else:
             postid_lte = results[0]['postid']
 
-
     # Get posts
     cur = connection.execute(
         "select postid "
@@ -69,7 +67,8 @@ def rest_get_posts():
     results = cur.fetchall()
 
     if len(results) == size:
-        context["next"] = f"/api/v1/posts/?size={size}&page={page + 1}&postid_lte={postid_lte}"
+        context["next"] = f"/api/v1/posts/?size={size}" +
+            f"&page={page + 1}&postid_lte={postid_lte}"
 
     for post in results:
         post["url"] = f"/api/v1/posts/{post['postid']}/"
@@ -130,7 +129,7 @@ def rest_get_post(postid_url_slug):
     context_likes["lognameLikesThis"] = False
     context_likes["numLikes"] = len(likes)
     context_likes["url"] = None
-    
+
     for like in likes:
         if like["owner"] == logname:
             context_likes["lognameLikesThis"] = True
@@ -150,4 +149,3 @@ def rest_get_post(postid_url_slug):
     }
 
     return flask.jsonify(**context)
-

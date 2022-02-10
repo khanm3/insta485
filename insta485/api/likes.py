@@ -4,8 +4,10 @@ import insta485
 from insta485.api.helpers import get_username
 from insta485.api.helpers import InvalidUsage
 
+
 @insta485.app.route('/api/v1/likes/', methods=['POST'])
 def rest_create_like():
+    """Create like on specified post."""
     logname = get_username()
     if not logname:
         raise InvalidUsage("Forbidden", 403)
@@ -30,22 +32,22 @@ def rest_create_like():
         response.status_code = 200
         return response
     # create like and return it
-    else:
-        connection.execute(
-                "insert into likes(owner, postid) "
-                "values(?, ?);",
-                (logname, postid)
-                )
-        cur = connection.execute("select last_insert_rowid();")
-        likeid = cur.fetchall()[0]['last_insert_rowid()']
-        context = {"likeid": str(likeid), "url": f"/api/v1/likes/{likeid}/"}
-        response = flask.jsonify(**context)
-        response.status_code = 201
-        return response
+    connection.execute(
+            "insert into likes(owner, postid) "
+            "values(?, ?);",
+            (logname, postid)
+            )
+    cur = connection.execute("select last_insert_rowid();")
+    likeid = cur.fetchall()[0]['last_insert_rowid()']
+    context = {"likeid": str(likeid), "url": f"/api/v1/likes/{likeid}/"}
+    response = flask.jsonify(**context)
+    response.status_code = 201
+    return response
 
 
 @insta485.app.route('/api/v1/likes/<int:likeid>/', methods=['DELETE'])
 def rest_delete_like(likeid):
+    """Delete like on specified post."""
     logname = get_username()
     if not logname:
         raise InvalidUsage("Forbidden", 403)
@@ -62,12 +64,12 @@ def rest_delete_like(likeid):
     result = cur.fetchall()
     if len(result) < 1:
         raise InvalidUsage("Not Found", 404)
-    elif result[0]['owner'] != logname:
+    if result[0]['owner'] != logname:
         raise InvalidUsage("Forbidden", 403)
-    else:
-        connection.execute(
-            "delete from likes "
-            "where likeid = ?;",
-            (likeid,)
-            )
-        return ("", 204)
+
+    connection.execute(
+        "delete from likes "
+        "where likeid = ?;",
+        (likeid,)
+        )
+    return ("", 204)

@@ -4,6 +4,7 @@ import insta485
 from insta485.api.helpers import get_username
 from insta485.api.helpers import InvalidUsage
 
+
 @insta485.app.route('/api/v1/comments/', methods=['POST'])
 def rest_create_comment():
     """Create a new comment."""

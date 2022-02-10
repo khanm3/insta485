@@ -7,7 +7,6 @@ from insta485.api.helpers import get_username
 @insta485.app.route('/api/v1/')
 def rest_get_index():
     """Return API resource URLs."""
-    
     context = {
         "comments": "/api/v1/comments/",
         "likes": "/api/v1/likes/",

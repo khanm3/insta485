@@ -5,10 +5,8 @@ URLs include:
 /
 """
 from os.path import exists
-import arrow
 import flask
 import insta485
-from insta485.views.helpers import setup_queries
 
 
 @insta485.app.route('/uploads/<filename>')

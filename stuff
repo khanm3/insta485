@@ -1,33 +1,51 @@
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /api/v1/posts/11/ HTTP/1.1" 200 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /api/v1/posts/10/ HTTP/1.1" 200 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /api/v1/posts/9/ HTTP/1.1" 200 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /api/v1/posts/8/ HTTP/1.1" 200 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /api/v1/posts/7/ HTTP/1.1" 200 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/505083b8b56c97429a728b68f31b0b2a089e5113.jpg HTTP/1.1" 200 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/2f1725ba19cd4bfda1ff6019705999c5.jpg HTTP/1.1" 200 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/e1a7c5c32973862ee15173b0259e3efdb6a391af.jpg HTTP/1.1" 304 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/8d8577f830c349ecbbde7fce0fbcd804.jpg HTTP/1.1" 304 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/eb9fd3b262e64f27ab07f3f621decbee.jpg HTTP/1.1" 304 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/c62c4ce510754212b59fdf58698e9811.jpg HTTP/1.1" 304 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/fd4616505b774a559b4add0358da56f9.jpg HTTP/1.1" 304 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/60ee58525db84750ace3b921c4ffd8dc.jpg HTTP/1.1" 304 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/422f239986534368b5dddffcf57128ac.jpg HTTP/1.1" 304 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/4330a06137fc447e9cab58758dc87b45.jpg HTTP/1.1" 304 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/3bb6e54fcf94414ca0767713569f26b0.jpg HTTP/1.1" 304 -
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/f027135daa9443778d4f306c6f7d3694.jpg HTTP/1.1" 304 -
------------------------------------------------------------------------------------------------------ Captured log teardown -----------------------------------------------------------------------------------------------------
-INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "POST /shutdown/ HTTP/1.1" 200 -
-======================================================================================================= warnings summary ========================================================================================================
-tests/test_scroll.py::test_infinite_scroll
-tests/test_scroll.py::test_infinite_scroll_many
-tests/test_scroll.py::test_scroll_refresh
-  /home/llemke/eecs485/p3-insta485-clientside/tests/conftest.py:337: UserWarning: The 'environ['werkzeug.server.shutdown']' function is deprecated and will be removed in Werkzeug 2.1.
-    shutdown_func()
+************* Module insta485.api.helpers
+insta485/api/helpers.py:14:4: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module insta485.api
+insta485/api/__init__.py:3:0: E0611: No name 'posts' in module 'insta485.api' (no-name-in-module)
+************* Module insta485.api.__init__
+insta485/api/__init__.py:3:0: E0001: Cannot import 'insta485.api.posts' due to syntax error 'invalid syntax (<unknown>, line 70)' (syntax-error)
+insta485/api/__init__.py:4:0: E0611: No name 'posts' in module 'insta485.api' (no-name-in-module)
+insta485/api/__init__.py:4:0: E0001: Cannot import 'insta485.api.posts' due to syntax error 'invalid syntax (<unknown>, line 70)' (syntax-error)
+************* Module insta485.api.posts
+insta485/api/posts.py:70:58: E0001: invalid syntax (<unknown>, line 70) (syntax-error)
+************* Module insta485.api.index
+insta485/api/index.py:1:0: R0801: Similar lines in 2 files
+==insta485.api.helpers:[37:48]
+==insta485.views.accounts:[42:54]
+    connection = insta485.model.get_db()
 
--- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-==================================================================================================== short test summary info ====================================================================================================
-ERROR tests/test_scroll.py::test_infinite_scroll - AssertionError: Errors in browser console:
-ERROR tests/test_scroll.py::test_infinite_scroll_many - AssertionError: Errors in browser console:
-ERROR tests/test_scroll.py::test_scroll_refresh - AssertionError: Errors in browser console:
-=========================================================================================== 3 passed, 3 warnings, 3 errors in 11.26s ============================================================================================
-(env) llemke@Lukas-XPS-15:p3-insta485-clientside$ 
+    cur = connection.execute(
+        "SELECT password "
+        "FROM users "
+        "WHERE username = ?",
+        (login_username,)
+    )
+    result = cur.fetchall()
+
+    # username doesn't have an account
+    if len(result) == 0: (duplicate-code)
+insta485/api/index.py:1:0: R0801: Similar lines in 2 files
+==insta485.api.comments:[58:66]
+==insta485.api.likes:[50:58]
+    logname = get_username()
+    if not logname:
+        raise InvalidUsage("Forbidden", 403)
+
+    connection = insta485.model.get_db()
+
+    # get user of like
+    cur = connection.execute( (duplicate-code)
+insta485/api/index.py:1:0: R0801: Similar lines in 2 files
+==insta485.api.helpers:[51:58]
+==insta485.views.accounts:[57:64]
+    password = result[0]["password"]
+    hash_alg = password.split('$')[0]
+    salt = password.split('$')[1]
+    password_attempt = gen_hash(login_password, hash_alg, salt)
+
+    # success
+    if password == password_attempt: (duplicate-code)
+
+------------------------------------------------------------------
+Your code has been rated at 9.49/10 (previous run: 9.30/10, +0.19)
+
