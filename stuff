@@ -1,23 +1,33 @@
-============================= test session starts ==============================
-platform linux -- Python 3.8.10, pytest-7.0.0, pluggy-1.0.0 -- /home/llemke/eecs485/p3-insta485-clientside/env/bin/python3
-cachedir: .pytest_cache
-rootdir: /home/llemke/eecs485/p3-insta485-clientside
-collecting ... collected 15 items
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /api/v1/posts/11/ HTTP/1.1" 200 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /api/v1/posts/10/ HTTP/1.1" 200 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /api/v1/posts/9/ HTTP/1.1" 200 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /api/v1/posts/8/ HTTP/1.1" 200 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /api/v1/posts/7/ HTTP/1.1" 200 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/505083b8b56c97429a728b68f31b0b2a089e5113.jpg HTTP/1.1" 200 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/2f1725ba19cd4bfda1ff6019705999c5.jpg HTTP/1.1" 200 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/e1a7c5c32973862ee15173b0259e3efdb6a391af.jpg HTTP/1.1" 304 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/8d8577f830c349ecbbde7fce0fbcd804.jpg HTTP/1.1" 304 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/eb9fd3b262e64f27ab07f3f621decbee.jpg HTTP/1.1" 304 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/c62c4ce510754212b59fdf58698e9811.jpg HTTP/1.1" 304 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/fd4616505b774a559b4add0358da56f9.jpg HTTP/1.1" 304 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/60ee58525db84750ace3b921c4ffd8dc.jpg HTTP/1.1" 304 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/422f239986534368b5dddffcf57128ac.jpg HTTP/1.1" 304 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/4330a06137fc447e9cab58758dc87b45.jpg HTTP/1.1" 304 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/3bb6e54fcf94414ca0767713569f26b0.jpg HTTP/1.1" 304 -
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "GET /uploads/f027135daa9443778d4f306c6f7d3694.jpg HTTP/1.1" 304 -
+----------------------------------------------------------------------------------------------------- Captured log teardown -----------------------------------------------------------------------------------------------------
+INFO     werkzeug:_internal.py:225 127.0.0.1 - - [09/Feb/2022 19:48:15] "POST /shutdown/ HTTP/1.1" 200 -
+======================================================================================================= warnings summary ========================================================================================================
+tests/test_scroll.py::test_infinite_scroll
+tests/test_scroll.py::test_infinite_scroll_many
+tests/test_scroll.py::test_scroll_refresh
+  /home/llemke/eecs485/p3-insta485-clientside/tests/conftest.py:337: UserWarning: The 'environ['werkzeug.server.shutdown']' function is deprecated and will be removed in Werkzeug 2.1.
+    shutdown_func()
 
-tests/test_rest_api_likes_and_comments.py::test_likes_delete PASSED      [  6%]
-tests/test_rest_api_likes_and_comments.py::test_likes_post PASSED        [ 13%]
-tests/test_rest_api_likes_and_comments.py::test_like_exists PASSED       [ 20%]
-tests/test_rest_api_likes_and_comments.py::test_comments_post PASSED     [ 26%]
-tests/test_rest_api_likes_and_comments.py::test_comments_delete PASSED   [ 33%]
-tests/test_rest_api_posts.py::test_posts_list PASSED                     [ 40%]
-tests/test_rest_api_posts.py::test_posts_detail PASSED                   [ 46%]
-tests/test_rest_api_posts.py::test_posts_autoincrement PASSED            [ 53%]
-tests/test_rest_api_posts.py::test_posts_pagination_simple PASSED        [ 60%]
-tests/test_rest_api_posts.py::test_posts_pagination_page_size PASSED     [ 66%]
-tests/test_rest_api_posts.py::test_posts_pagination_upload_between_requests PASSED [ 73%]
-tests/test_rest_api_posts.py::test_posts_pagination_errors PASSED        [ 80%]
-tests/test_rest_api_simple.py::test_resources PASSED                     [ 86%]
-tests/test_rest_api_simple.py::test_login_session PASSED                 [ 93%]
-tests/test_rest_api_simple.py::test_http_basic_auth PASSED               [100%]
-
-============================== 15 passed in 1.97s ==============================
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+==================================================================================================== short test summary info ====================================================================================================
+ERROR tests/test_scroll.py::test_infinite_scroll - AssertionError: Errors in browser console:
+ERROR tests/test_scroll.py::test_infinite_scroll_many - AssertionError: Errors in browser console:
+ERROR tests/test_scroll.py::test_scroll_refresh - AssertionError: Errors in browser console:
+=========================================================================================== 3 passed, 3 warnings, 3 errors in 11.26s ============================================================================================
+(env) llemke@Lukas-XPS-15:p3-insta485-clientside$ 

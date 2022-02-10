@@ -166,7 +166,7 @@ class Post extends React.Component {
           {likes.lognameLikesThis ? 'unlike' : 'like'}
         </button>
         {comments.map((comment) => (
-          <p>
+          <p key={comment.commentid}>
             <b><a href={comment.ownerShowUrl}>{comment.owner}</a></b>
             {' '}
             {comment.text}
