@@ -60,10 +60,10 @@ def rest_delete_comment(commentid):
     if not logname:
         raise InvalidUsage("Forbidden", 403)
 
-    connection = insta485.model.get_db()
+    conndb = insta485.model.get_db()
 
     # find comment
-    cur = connection.execute(
+    cur = conndb.execute(
         "select owner "
         "from comments "
         "where commentid = ?;",
@@ -79,7 +79,7 @@ def rest_delete_comment(commentid):
         raise InvalidUsage("Forbidden", 403)
 
     # delete comment
-    cur = connection.execute(
+    cur = conndb.execute(
         "delete from comments "
         "where commentid = ?;",
         (commentid,)

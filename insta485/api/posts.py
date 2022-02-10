@@ -7,7 +7,7 @@ from insta485.api.helpers import InvalidUsage
 
 @insta485.app.route('/api/v1/posts/')
 def rest_get_posts():
-    """Return 10 newest post urls and ids. """
+    """Return 10 newest post urls and ids."""
     logname = get_username()
     if not logname:
         raise InvalidUsage("Forbidden", 403)
@@ -67,8 +67,10 @@ def rest_get_posts():
     results = cur.fetchall()
 
     if len(results) == size:
-        context["next"] = f"/api/v1/posts/?size={size}" +
+        context["next"] = (
+            f"/api/v1/posts/?size={size}"
             f"&page={page + 1}&postid_lte={postid_lte}"
+        )
 
     for post in results:
         post["url"] = f"/api/v1/posts/{post['postid']}/"
@@ -79,7 +81,7 @@ def rest_get_posts():
 
 @insta485.app.route('/api/v1/posts/<int:postid_url_slug>/')
 def rest_get_post(postid_url_slug):
-    """Return post on postid. """
+    """Return post on postid."""
     logname = get_username()
     if not logname:
         raise InvalidUsage("Forbidden", 403)

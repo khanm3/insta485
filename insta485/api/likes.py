@@ -17,11 +17,11 @@ def rest_create_like():
 
     # determine if like exists
     cur = connection.execute(
-            "select likeid "
-            "from likes "
-            "where owner = ? and postid = ?;",
-            (logname, postid)
-            )
+        "select likeid "
+        "from likes "
+        "where owner = ? and postid = ?;",
+        (logname, postid)
+    )
     result = cur.fetchall()
 
     # like already exists
@@ -52,10 +52,10 @@ def rest_delete_like(likeid):
     if not logname:
         raise InvalidUsage("Forbidden", 403)
 
-    connection = insta485.model.get_db()
+    conn = insta485.model.get_db()
 
     # get user of like
-    cur = connection.execute(
+    cur = conn.execute(
             "select owner, postid "
             "from likes "
             "where likeid = ?;",
@@ -67,7 +67,7 @@ def rest_delete_like(likeid):
     if result[0]['owner'] != logname:
         raise InvalidUsage("Forbidden", 403)
 
-    connection.execute(
+    conn.execute(
         "delete from likes "
         "where likeid = ?;",
         (likeid,)

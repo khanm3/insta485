@@ -6,7 +6,9 @@ from insta485.views.helpers import gen_hash
 
 class InvalidUsage(Exception):
     """Represent erroneous HTTP request."""
+
     def __init__(self, message, status_code):
+        """Create custom exception class for Flask errors."""
         Exception.__init__(self)
         self.message = message
         self.status_code = status_code
@@ -18,7 +20,7 @@ class InvalidUsage(Exception):
 
 @insta485.app.errorhandler(InvalidUsage)
 def handle_invalid_usage(error):
-    """Return http response"""
+    """Return http response."""
     response = flask.jsonify(error.to_dict())
     response.status = error.status_code
     return response
@@ -38,9 +40,7 @@ def get_username():
 
     connection = insta485.model.get_db()
     cur = connection.execute(
-        "SELECT password "
-        "FROM users "
-        "WHERE username = ?",
+        "SELECT password FROM users WHERE username = ?;",
         (login_username,)
     )
     result = cur.fetchall()
@@ -51,9 +51,9 @@ def get_username():
 
     # database store: sha512 $ salt $ hash(salt + password)
     password = result[0]["password"]
-    hash_alg = password.split('$')[0]
+    alg_hash = password.split('$')[0]
     salt = password.split('$')[1]
-    password_attempt = gen_hash(login_password, hash_alg, salt)
+    password_attempt = gen_hash(login_password, alg_hash, salt)
 
     # success
     if password == password_attempt:
