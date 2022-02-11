@@ -45,7 +45,7 @@ class Feed extends React.Component {
         this.setState({
           results: data.results,
           next: data.next,
-          allPosts: Feed.renderNewPosts(data.results),
+          allPosts: this.state.allPosts.concat(Feed.renderNewPosts(data.results)),
         });
         console.log(this.state);
         // add state to browser history
