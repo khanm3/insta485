@@ -20,9 +20,18 @@ class Feed extends React.Component {
   }
 
   componentDidMount() {
-    // This line automatically assigns this.props.url to the const variable url
-    const { url } = this.props;
-    this.getPosts(url);
+    console.log("1");
+    console.log(window.performance.navigation.type);
+    console.log(new Date());
+    console.log(PerformanceNavigationTiming.type);
+    console.log(performance.getEntriesByType("navigation").type);
+    if (PerformanceNavigationTiming.type === 'back_forward') {
+      this.setState(window.history.state);
+    } else {
+      // This line automatically assigns this.props.url to the const variable url
+      const { url } = this.props;
+      this.getPosts(url);
+    }
   }
 
   getPosts(url) {
@@ -35,6 +44,7 @@ class Feed extends React.Component {
       .then((data) => {
         this.setState(data);
         this.appendNewPosts();
+        window.history.replaceState(this.state, 'Index', '/');
       })
       .catch((error) => console.log(error));
   }

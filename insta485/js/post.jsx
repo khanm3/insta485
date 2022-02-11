@@ -53,7 +53,6 @@ class Post extends React.Component {
   handleLike() {
     const { postid, likes } = this.state;
     if (likes.lognameLikesThis) {
-      console.log('here');
       fetch(likes.url, {
         method: 'DELETE',
         credentials: 'same-origin',
@@ -69,7 +68,6 @@ class Post extends React.Component {
         })
         .catch((error) => console.log(error));
     } else {
-      console.log('why');
       const url = `/api/v1/likes/?postid=${postid}`;
       fetch(url, {
         method: 'POST',

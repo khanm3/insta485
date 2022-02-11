@@ -1,5 +1,10 @@
-1) when is "next" for posts empty? When you have exactly size posts, should next return the next page even though its empty? 
-2) string vs int for likeid
-
 todo:
 - history api
+
+
+in feed componentdidmount, if we detect a performancenav foward_back, then 
+instead of calling getPosts, we want to do history.State and set the feed state
+to what we stored on to the history state.
+
+on any feed state update (in getPosts), do history.replaceState
+to put the feed state into our history
