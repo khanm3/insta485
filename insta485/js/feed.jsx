@@ -13,10 +13,8 @@ class Feed extends React.Component {
       results: [],
       allPosts: [],
       next: '',
-      allNoRender: [],
     };
     this.fetchMoreData = this.fetchMoreData.bind(this);
-    this.appendNewPosts = this.appendNewPosts.bind(this);
     this.getPosts = this.getPosts.bind(this);
   }
 
@@ -24,12 +22,9 @@ class Feed extends React.Component {
     console.log(new Date());
     console.log(window.performance.getEntriesByType('navigation')[0].type);
     if (window.performance.getEntriesByType('navigation')[0].type === 'back_forward') {
+      // re-render posts
       const data = JSON.parse(window.history.state);
-      /* data.allPosts.forEach((value, index) => {
-        const temp = value;
-        temp.$$typeof = Symbol(react.element);
-        data.allPosts[index] = temp;
-      }); */
+      data.allPosts = Feed.renderNewPosts(data.allPosts);
       console.log(data);
       this.setState(data);
     } else {
@@ -47,25 +42,21 @@ class Feed extends React.Component {
         return response.json();
       })
       .then((data) => {
-        this.setState(data);
-        this.appendNewPosts();
-        /* const { results, allPosts, next } = this.state;
-        const hist = { results, allPosts, next, };
-        console.log(this.state); */
-        const { results, next, allNoRender } = this.state;
-        const hist = { results, next, allNoRender };
+        this.setState({
+          results: data.results,
+          next: data.next,
+          allPosts: Feed.renderNewPosts(data.results),
+        });
+        console.log(this.state);
+        // add state to browser history
+        const { results, next, allPosts } = this.state;
+        const tempAllPosts = allPosts.map((post) => (
+          { postid: post.key, url: '/api/v1/posts/'.concat(post.key, '/') }
+        ));
+        const hist = { results, next, allPosts: tempAllPosts };
         window.history.replaceState(JSON.stringify(hist), 'Index', '/');
       })
       .catch((error) => console.log(error));
-  }
-
-  appendNewPosts() {
-    this.setState((prevState) => ({
-      allPosts: prevState.allPosts.concat(prevState.results.map((post) => (
-        <Post url={post.url} key={post.url} />
-      ))),
-      allNoRender: prevState.allNoRender.concat(prevState.results),
-    }));
   }
 
   fetchMoreData() {
@@ -73,18 +64,18 @@ class Feed extends React.Component {
     this.getPosts(next);
   }
 
+  static renderNewPosts(results) {
+    return results.map((post) => (
+      <Post url={post.url} key={post.postid} />
+    ));
+  }
+
   render() {
     // This line automatically assigns this.state.imgUrl to the const variable imgUrl
     // and this.state.owner to the const variable owner
-    const { next, allPosts, allNoRender } = this.state;
+    const { next, allPosts } = this.state;
 
     // Render number of post image and post owner
-    console.log("render");
-    console.log(this.state);
-    let render = allPosts;
-    if (allPosts.length === 0) {
-      render = allNoRender.map((post) => (<Post url={post.url} key={post.url} />));
-    }
     return (
       <div className="feed">
         <InfiniteScroll
@@ -92,7 +83,7 @@ class Feed extends React.Component {
           next={this.fetchMoreData}
           hasMore={() => next !== ''}
         >
-          {render}
+          {allPosts}
         </InfiniteScroll>
       </div>
     );
