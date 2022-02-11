@@ -13,6 +13,7 @@ class Feed extends React.Component {
       results: [],
       allPosts: [],
       next: '',
+      allNoRender: [],
     };
     this.fetchMoreData = this.fetchMoreData.bind(this);
     this.appendNewPosts = this.appendNewPosts.bind(this);
@@ -24,11 +25,11 @@ class Feed extends React.Component {
     console.log(window.performance.getEntriesByType('navigation')[0].type);
     if (window.performance.getEntriesByType('navigation')[0].type === 'back_forward') {
       const data = JSON.parse(window.history.state);
-      data.allPosts.forEach((value, index) => {
+      /* data.allPosts.forEach((value, index) => {
         const temp = value;
-        //temp.$$typeof = Symbol(react.element);
+        temp.$$typeof = Symbol(react.element);
         data.allPosts[index] = temp;
-      });
+      }); */
       console.log(data);
       this.setState(data);
     } else {
@@ -46,14 +47,13 @@ class Feed extends React.Component {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         this.setState(data);
         this.appendNewPosts();
-        const { results, allPosts, next } = this.state;
-        const hist = {
-          results, allPosts, next,
-        };
-        console.log(this.state);
+        /* const { results, allPosts, next } = this.state;
+        const hist = { results, allPosts, next, };
+        console.log(this.state); */
+        const { results, next, allNoRender } = this.state;
+        const hist = { results, next, allNoRender };
         window.history.replaceState(JSON.stringify(hist), 'Index', '/');
       })
       .catch((error) => console.log(error));
@@ -64,6 +64,7 @@ class Feed extends React.Component {
       allPosts: prevState.allPosts.concat(prevState.results.map((post) => (
         <Post url={post.url} key={post.url} />
       ))),
+      allNoRender: prevState.allNoRender.concat(prevState.results),
     }));
   }
 
@@ -75,10 +76,15 @@ class Feed extends React.Component {
   render() {
     // This line automatically assigns this.state.imgUrl to the const variable imgUrl
     // and this.state.owner to the const variable owner
-    const { next, allPosts } = this.state;
+    const { next, allPosts, allNoRender } = this.state;
 
     // Render number of post image and post owner
     console.log("render");
+    console.log(this.state);
+    let render = allPosts;
+    if (allPosts.length === 0) {
+      render = allNoRender.map((post) => (<Post url={post.url} key={post.url} />));
+    }
     return (
       <div className="feed">
         <InfiniteScroll
@@ -86,7 +92,7 @@ class Feed extends React.Component {
           next={this.fetchMoreData}
           hasMore={() => next !== ''}
         >
-          {allPosts}
+          {render}
         </InfiniteScroll>
       </div>
     );
