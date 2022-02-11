@@ -20,13 +20,17 @@ class Feed extends React.Component {
   }
 
   componentDidMount() {
-    console.log("1");
-    console.log(window.performance.navigation.type);
     console.log(new Date());
-    console.log(PerformanceNavigationTiming.type);
-    console.log(performance.getEntriesByType("navigation").type);
-    if (PerformanceNavigationTiming.type === 'back_forward') {
-      this.setState(window.history.state);
+    console.log(window.performance.getEntriesByType('navigation')[0].type);
+    if (window.performance.getEntriesByType('navigation')[0].type === 'back_forward') {
+      const data = JSON.parse(window.history.state);
+      data.allPosts.forEach((value, index) => {
+        const temp = value;
+        //temp.$$typeof = Symbol(react.element);
+        data.allPosts[index] = temp;
+      });
+      console.log(data);
+      this.setState(data);
     } else {
       // This line automatically assigns this.props.url to the const variable url
       const { url } = this.props;
@@ -42,9 +46,15 @@ class Feed extends React.Component {
         return response.json();
       })
       .then((data) => {
+        console.log(data);
         this.setState(data);
         this.appendNewPosts();
-        window.history.replaceState(this.state, 'Index', '/');
+        const { results, allPosts, next } = this.state;
+        const hist = {
+          results, allPosts, next,
+        };
+        console.log(this.state);
+        window.history.replaceState(JSON.stringify(hist), 'Index', '/');
       })
       .catch((error) => console.log(error));
   }
@@ -68,6 +78,7 @@ class Feed extends React.Component {
     const { next, allPosts } = this.state;
 
     // Render number of post image and post owner
+    console.log("render");
     return (
       <div className="feed">
         <InfiniteScroll
