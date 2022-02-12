@@ -98,7 +98,7 @@ def rest_get_post(postid_url_slug):
     post = cur.fetchall()
 
     if len(post) != 1:
-        raise InvalidUsage("Not found", 404)
+        raise InvalidUsage("Not Found", 404)
 
     # Get comments of this post
     cur = connection.execute(

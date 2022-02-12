@@ -10,7 +10,6 @@ class Feed extends React.Component {
     // Initialize mutable state
     super(props);
     this.state = {
-      results: [],
       allPosts: [],
       next: '',
     };
@@ -19,13 +18,10 @@ class Feed extends React.Component {
   }
 
   componentDidMount() {
-    console.log(new Date());
-    console.log(window.performance.getEntriesByType('navigation')[0].type);
     if (window.performance.getEntriesByType('navigation')[0].type === 'back_forward') {
       // re-render posts
       const data = JSON.parse(window.history.state);
       data.allPosts = Feed.renderNewPosts(data.allPosts);
-      console.log(data);
       this.setState(data);
     } else {
       // This line automatically assigns this.props.url to the const variable url
@@ -42,18 +38,17 @@ class Feed extends React.Component {
         return response.json();
       })
       .then((data) => {
-        this.setState({
-          results: data.results,
+        this.setState((prevState) => ({
           next: data.next,
-          allPosts: this.state.allPosts.concat(Feed.renderNewPosts(data.results)),
-        });
-        console.log(this.state);
+          allPosts: prevState.allPosts.concat(Feed.renderNewPosts(data.results)),
+        }));
+
         // add state to browser history
-        const { results, next, allPosts } = this.state;
+        const { next, allPosts } = this.state;
         const tempAllPosts = allPosts.map((post) => (
           { postid: post.key, url: '/api/v1/posts/'.concat(post.key, '/') }
         ));
-        const hist = { results, next, allPosts: tempAllPosts };
+        const hist = { next, allPosts: tempAllPosts };
         window.history.replaceState(JSON.stringify(hist), 'Index', '/');
       })
       .catch((error) => console.log(error));

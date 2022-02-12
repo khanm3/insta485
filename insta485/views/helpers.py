@@ -10,8 +10,8 @@ import insta485
 def gen_hash(password, alg='sha512', salt=uuid.uuid4().hex):
     """Return hash of password."""
     # database store: sha512 $ salt $ hash(salt + password)
-    print(alg)
-    print(salt)
+    # print(alg)
+    # print(salt)
     hash_obj = hashlib.new(alg)
     password_salted = salt + password
     hash_obj.update(password_salted.encode('utf-8'))

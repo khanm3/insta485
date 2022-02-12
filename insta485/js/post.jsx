@@ -38,10 +38,6 @@ class Post extends React.Component {
       })
       .then((data) => {
         this.setState(data);
-        // this.setState({
-        //   imgUrl: data.imgUrl,
-        //   owner: data.owner,
-        // });
       })
       .catch((error) => console.log(error));
   }
@@ -117,7 +113,6 @@ class Post extends React.Component {
       })
       .catch((error) => console.log(error));
 
-    console.log(commentFormText);
     this.setState({ commentFormText: '' });
     event.target.reset();
     event.preventDefault();

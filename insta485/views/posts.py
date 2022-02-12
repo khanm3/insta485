@@ -71,7 +71,6 @@ def get_post(postid):
         if like["owner"] == logname:
             context["liked"] = True
 
-    print(context)
     # Add databse info to context
     return flask.render_template("post.html", **context)
 

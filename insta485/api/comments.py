@@ -25,7 +25,7 @@ def rest_create_comment():
     )
 
     if len(cur.fetchall()) < 1:
-        raise InvalidUsage("Not found", 404)
+        raise InvalidUsage("Not Found", 404)
 
     # create comment
     cur = connection.execute(

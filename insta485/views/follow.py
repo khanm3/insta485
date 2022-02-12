@@ -72,7 +72,6 @@ def gen_follow_page(username, follow_type):
     context = {"logname": logname, "username": username,
                "follow": follow, "follow_type": follow_type}
 
-    print(context)
     return flask.render_template("follow.html", **context)
 
 
