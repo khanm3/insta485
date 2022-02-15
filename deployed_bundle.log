@@ -1,24 +1,24 @@
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 52.200.135.54:80...
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 52.200.135.54:80...
 * Connected to ec2-52-200-135-54.compute-1.amazonaws.com (52.200.135.54) port 80 (#0)
 > GET /static/js/bundle.js HTTP/1.1
 > Host: ec2-52-200-135-54.compute-1.amazonaws.com
 > User-Agent: curl/7.74.0
 > Accept: */*
-> Cookie: login=eyJsb2duYW1lIjoiYXdkZW9yaW8ifQ.Ygq_7A.IjDPsgaEHZ1XhuMmRSB-mZl3590
+> Cookie: login=eyJsb2duYW1lIjoiYXdkZW9yaW8ifQ.YgsADQ.5RezskPo3biI116-Obs0iHwByYE
 > 
 * Mark bundle as not supporting multiuse
 < HTTP/1.1 200 OK
 < Server: nginx/1.18.0 (Ubuntu)
-< Date: Mon, 14 Feb 2022 20:48:38 GMT
+< Date: Tue, 15 Feb 2022 01:22:12 GMT
 < Content-Type: application/javascript; charset=utf-8
-< Content-Length: 1815063
+< Content-Length: 1085967
 < Connection: keep-alive
 < Content-Disposition: inline; filename=bundle.js
-< Last-Modified: Mon, 14 Feb 2022 20:42:09 GMT
+< Last-Modified: Tue, 15 Feb 2022 01:19:48 GMT
 < Cache-Control: no-cache
 < 
-{ [1139 bytes data]
-100 1772k  100 1772k    0     0  3779k      0 --:--:-- --:--:-- --:--:-- 3779k
+{ [2587 bytes data]
+100 1060k  100 1060k    0     0  2754k      0 --:--:-- --:--:-- --:--:-- 2747k
 * Connection #0 to host ec2-52-200-135-54.compute-1.amazonaws.com left intact
