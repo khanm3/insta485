@@ -26,6 +26,7 @@ node_modules/
 cookies.txt
 session.json
 bundle.js
+bundle.js.map
 
 # EECS 485 Project 4
 tmp
