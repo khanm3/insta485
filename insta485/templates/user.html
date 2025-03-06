@@ -56,7 +56,7 @@
         </div>
         <div class="imgs_container">
             {% for post_info in posts %}
-            <a class="post_container" href="/posts/{{post_info.postid}}/">
+            <a href="/posts/{{post_info.postid}}/">
                 <img alt="picture" src="/uploads/{{post_info.img_url}}">
             </a>
             {% endfor %}
