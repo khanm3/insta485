@@ -1,0 +1,8 @@
+services:
+  insta485:
+    image: khanm3/insta485
+    ports:
+      - "80:5000"
+    volumes:
+      - "./var:/workdir/var"
+    stop_signal: SIGINT
