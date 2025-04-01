@@ -10,5 +10,15 @@
 
 <p>Don't have an account? <a href="/accounts/create/"><b>Sign up</b></a></p>
 
+<div class="guest-login-btn-container">
+    <span>Don't want to sign up for an account?</span>
+    <form action="/accounts/?target=/" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="username" value="awdeorio"/>
+        <input type="hidden" name="password" value="password"/>
+        <input type="hidden" name="operation" value="login"/>
+        <button class="guest-login-btn">Click here</button> to sign in as a guest account
+    </form>
+</div>
+
 </body>
 </html>
